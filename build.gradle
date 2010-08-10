@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile 'org.codehaus.groovy.modules:groovyws:0.5.2'
+}
+
+task copyRuntimeDependencies(dependsOn: configurations.runtime.buildArtifacts, type: Copy) {
+	into('build/output/lib')
+	from configurations.runtime
+	from configurations.runtime.allArtifacts*.file
+}
